@@ -64,7 +64,7 @@ plt.show()
 ## Output:
 <img width="979" height="581" alt="Screenshot 2026-11-23 111239" src="https://github.com/user-attachments/assets/9f8bde2b-a8f1-4f34-ad64-d41b7176a48f" />
 
-![Uploading image.png…]()
+<img width="776" height="78" alt="Screenshot 2026-11-23 112920" src="https://github.com/user-attachments/assets/5e697379-e9df-4b8f-b37d-7f3188293337" />
 
 
 <img width="852" height="507" alt="Screenshot 2026-11-23 111251" src="https://github.com/user-attachments/assets/17407db4-b095-4bf7-8526-03943a6a7b2d" />
