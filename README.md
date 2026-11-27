@@ -22,52 +22,62 @@ Predict the CO2 emission of a car where the weight is 2300kg, and the volume is 
 
 ## Program:
 ```
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+from sklearn import datasets, linear_model, metrics
 
-# Preprocessing Input data
-X = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-Y = np.array([1, 3, 2, 5, 7, 8, 8, 9, 10, 12])
+# load the boston dataset
+diabetes = datasets.load_diabetes(return_X_y=False)
 
-plt.scatter(X, Y)
+# defining feature matrix(X) and response vector(y)
+X = diabetes.data
+y = diabetes.target
+
+# splitting X and y into training and testing sets
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4,
+                                                     random_state=1)
+
+# create linear regression object
+reg = linear_model.LinearRegression()
+
+# train the model using the training sets
+reg.fit(X_train, y_train)
+
+# regression coefficients
+print('Coefficients: ', reg.coef_)
+
+# variance score: 1 means perfect prediction
+print('Variance score: {}'.format(reg.score(X_test, y_test)))
+
+# plot for residual error
+
+## setting style
+plt.style.use('fivethirtyeight')
+
+## plotting residual errors in training data
+plt.scatter(reg.predict(X_train), reg.predict(X_train) - y_train,
+            color = "green", s = 10, label = 'Train data')
+
+## plotting residual errors in test data
+plt.scatter(reg.predict(X_test), reg.predict(X_test) - y_test,
+            color = "blue", s = 10, label = 'Test data')
+
+## plotting line for zero residual error
+plt.hlines(y = 0, xmin = 0, xmax = 50, linewidth = 2)
+
+## plotting legend
+plt.legend(loc = 'upper right')
+
+## plot title
+plt.title("Residual errors")
+
+## method call for showing the plot
 plt.show()
-
-# Building the model
-X_mean = np.mean(X)
-Y_mean = np.mean(Y)
-
-num = 0
-den = 0
-for i in range(len(X)):
-    num += (X[i] - X_mean)*(Y[i] - Y_mean)
-    den += (X[i] - X_mean)**2
-m = num / den
-c = Y_mean - m*X_mean
-
-print (m, c)
-
-# Making predictions
-Y_pred = m*X + c
-print(Y_pred)
-
-plt.scatter(X, Y) # actual
-plt.scatter(X, Y_pred, color="red")
-plt.plot([min(X), max(X)], [min(Y_pred), max(Y_pred)], color='red') # predicted
-plt.show()
-
-
-
-
-
-
 ```
 ## Output:
-<img width="979" height="581" alt="Screenshot 2026-11-23 111239" src="https://github.com/user-attachments/assets/9f8bde2b-a8f1-4f34-ad64-d41b7176a48f" />
+<img width="1013" height="628" alt="Screenshot 2026-11-23 104818" src="https://github.com/user-attachments/assets/093e02ab-34f9-4756-a867-007a4c4fcdb5" />
 
-
-
-
-<img width="852" height="507" alt="Screenshot 2026-11-23 111251" src="https://github.com/user-attachments/assets/17407db4-b095-4bf7-8526-03943a6a7b2d" />
 
 
 ### Insert your output
